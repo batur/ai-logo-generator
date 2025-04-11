@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     "node_modules": true,
-    ".gitignore": true
+    ".gitignore": true,
+    ".husky": true
   }
 }
