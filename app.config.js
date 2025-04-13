@@ -8,6 +8,12 @@ module.exports = {
     scheme: "myapp",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
+    updates: {
+      url: "https://u.expo.dev/8ea7c32e-cc64-4d29-8937-d3f74075c6d4",
+    },
+    runtimeVersion: {
+      policy: "appVersion",
+    },
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.example.aiLogoGenerator",
