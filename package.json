@@ -10,7 +10,6 @@
     "url": "https://batur.io"
   },
   "scripts": {
-    "eas-build-pre-install": "bash ./.eas/hooks/pre-install/google-services-json.sh",
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
