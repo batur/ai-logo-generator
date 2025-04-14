@@ -71,11 +71,12 @@ const PromptBox = () => {
           submitBehavior="blurAndSubmit"
           onSubmitEditing={setSubmitting}
           placeholderTextColor={constants.NEUTRAL_WHITE}
-          placeholder="A blue lion logo reading ‘HEXA’ in bold letters"
-          className="p-3 h-80 w-full bg-zinc-800 rounded-2xl self-stretch justify-center text-neutral-50 text-base font-normal font-serif leading-tight focus:border-2 focus:border-neutral-50 focus:outline-none"
+          placeholder="A blue lion logo reading 'HEXA' in bold letters"
+          textAlignVertical="top"
+          className="p-3 h-80 w-full bg-zinc-800 rounded-2xl self-stretch text-neutral-50 text-base font-normal font-serif leading-tight focus:border-2 focus:border-neutral-50 focus:outline-none"
         />
         <View className="flex flex-row items-end justify-between w-full absolute bottom-0 px-3 pb-3">
-          <Text className="text-zinc-400 text-xs font-normal leading-3 font-serif">
+          <Text className="text-zinc-500 text-xs font-normal leading-3 font-serif">
             {prompt.length}/{MAX_LENGTH}
           </Text>
           <TouchableOpacity
