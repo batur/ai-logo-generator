@@ -26,6 +26,7 @@ const useGetJobs = () =>
   useQuery({
     queryKey: ["styles"],
     queryFn: fetchStyles,
+    staleTime: 1000 * 60 * 60, // 1 hour in milliseconds
   });
 
 export default useGetJobs;
