@@ -15,7 +15,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
     if (status === "done") {
       setTimeout(() => {
         setJobId("");
-      }, 5000);
+      }, 7500);
     }
   }, [status]);
 
