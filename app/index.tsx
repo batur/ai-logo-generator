@@ -8,8 +8,12 @@ import {
   StatusIndicator,
   StyleList,
 } from "@/components";
+import { useGetJobs } from "@/hooks";
 
 export default function Index() {
+  const { data } = useGetJobs();
+
+  console.log("Jobs data:", data?.map((job) => JSON.stringify(job)).join(", "));
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar showHideTransition="fade" barStyle="light-content" />

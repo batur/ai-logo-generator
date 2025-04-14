@@ -4,7 +4,6 @@ module.exports = {
     slug: "ai-logo-generator",
     version: "0.1.0",
     orientation: "portrait",
-    icon: "./assets/images/icon.png",
     scheme: "myapp",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
@@ -27,27 +26,13 @@ module.exports = {
       googleServicesFile:
         process.env.GOOGLE_SERVICES_FILE_ANDROID ?? "./google-services.json",
       package: "com.example.aiLogoGenerator",
-      adaptiveIcon: {
-        foregroundImage: "./assets/images/adaptive-icon.png",
-        backgroundColor: "#ffffff",
-      },
     },
     web: {
       bundler: "metro",
       output: "static",
-      favicon: "./assets/images/favicon.png",
     },
     plugins: [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          image: "./assets/images/splash-icon.png",
-          imageWidth: 200,
-          resizeMode: "contain",
-          backgroundColor: "#ffffff",
-        },
-      ],
       "@react-native-firebase/app",
       "@react-native-firebase/crashlytics",
       [
