@@ -54,7 +54,7 @@ const CreateButton = () => {
         end={{ x: 0, y: 0 }}
       >
         <View className="flex flex-row items-center justify-center gap-2 p-[17px]">
-          <Text className="text-neutral-50">Create</Text>
+          <Text className="text-neutral-50 font-serif">Create</Text>
           <Stars color={constants.NEUTRAL_WHITE} />
         </View>
       </LinearGradient>

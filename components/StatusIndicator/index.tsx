@@ -39,10 +39,10 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
             }}
           >
             <View className="flex flex-col justify-center h-full gap-[2px] p-3">
-              <Text className="text-neutral-50 text-base font-extrabold leading-tight">
+              <Text className="text-neutral-50 text-base font-extrabold leading-tight font-serif">
                 Creating Your Design
               </Text>
-              <Text className="text-zinc-500 text-xs font-medium">
+              <Text className="text-zinc-500 text-xs font-medium font-serif">
                 Ready in 2 minutes
               </Text>
             </View>

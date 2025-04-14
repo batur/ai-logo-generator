@@ -49,7 +49,7 @@ const Item: React.FC<Props> = ({ item }) => {
         )}
       </View>
 
-      <Text className="text-neutral-50 font-extrabold text-[13px] leading-[18px]">
+      <Text className="text-neutral-50 font-extrabold text-[13px] leading-[18px] font-serif">
         {item.name}
       </Text>
     </TouchableOpacity>

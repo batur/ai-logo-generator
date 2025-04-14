@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ variant = "default" }) => {
   if (variant === "default") {
     return (
       <View className="flex items-center justify-center py-3 mx-6 h-[60px]">
-        <Text className="text-neutral-50 font-extrabold leading-snug text-[17px]">
+        <Text className="text-neutral-50 font-extrabold leading-snug text-[17px] font-serif">
           AI Logo
         </Text>
       </View>
@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ variant = "default" }) => {
 
   return (
     <View className=" justify-center flex py-4 mx-6 h-[60px]">
-      <Text className="text-neutral-50 font-extrabold leading-7 text-[22px]">
+      <Text className="text-neutral-50 font-extrabold leading-7 text-[22px] font-serif">
         Your Design
       </Text>
       <TouchableOpacity

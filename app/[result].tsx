@@ -53,7 +53,7 @@ export default function Index() {
               }}
             >
               <View className="flex flex-row items-center justify-between">
-                <Text className="text-neutral-50 text-[15px] font-bold leading-5">
+                <Text className="text-neutral-50 text-[15px] font-bold leading-5 font-serif">
                   Prompt
                 </Text>
                 <TouchableOpacity className="flex flex-row items-center justify-center gap-[6px]">
@@ -62,14 +62,16 @@ export default function Index() {
                     height={16}
                     color={constants.ZINC_400}
                   />
-                  <Text className="text-zinc-400 text-[11px]">Copy</Text>
+                  <Text className="text-zinc-400 text-[11px] font-serif">
+                    Copy
+                  </Text>
                 </TouchableOpacity>
               </View>
-              <Text className="text-neutral-50 text-base font-medium py-3">
+              <Text className="text-neutral-50 text-base font-medium py-3 font-serif">
                 {data?.prompt}
               </Text>
               <View className="p-2 bg-zinc-800/0 rounded-full max-w-20">
-                <Text className="text-neutral-50 text-xs font-normal">
+                <Text className="text-neutral-50 text-xs font-normal font-serif">
                   {data?.style_name}
                 </Text>
               </View>
