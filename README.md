@@ -34,6 +34,17 @@ Before you begin, ensure you have the following installed:
 - Installation
 - Clone the repository
 
+## Deployment
+
+The project is designed to be deployed using EAS (Expo Application Services) for both iOS and Android platforms. Follow the steps below to set up your environment and run the project. All the steps are in the `eas.json` file.
+
+Also latest build of the app building in EAS right now, you can check the latest builds:
+
+- [iOS Build](https://expo.dev/accounts/paxtartarica/projects/ai-logo-generator/builds/94487601-7f37-4a78-b769-b62167cecd46)
+- [Android Build](https://expo.dev/accounts/paxtartarica/projects/ai-logo-generator/builds/47ae0498-6837-4d58-806d-9d8b5ecfd34d)
+
+_Side note: The links above are for the latest builds, but you can check the latest build in the EAS dashboard. The links can be updated when a new build is created._
+
 ### Steps:
 
 1. Create a Firebase project
@@ -50,6 +61,8 @@ yarn
 yarn expo run:ios # or
 yarn expo run:android
 ```
+
+**Voila!**
 
 After the build is complete, you can run the app on your device or emulator no need additional setup for iOS and Android, just run the command below:
 

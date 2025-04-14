@@ -17,7 +17,10 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "transform-svgs": "npx @svgr/cli --out-dir components/icons --native --typescript --icon --memo --ignore-existing -- assets/svgs"
+    "transform-svgs": "npx @svgr/cli --out-dir components/icons --native --typescript --icon --memo --ignore-existing -- assets/svgs",
+    "eas:android:build:preview": "eas build --platform android --profile preview",
+    "eas:android:build:production": "eas build --platform android --profile production",
+    "eas:ios:build:development": "eas build --platform ios --profile development"
   },
   "jest": {
     "preset": "jest-expo"
