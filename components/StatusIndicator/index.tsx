@@ -17,7 +17,7 @@ type StatusIndicatorProps = {
 };
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({
-  status = "processing",
+  status,
   imageURL,
 }) => {
   const { setJobId, jobId } = useJobIdStore();
