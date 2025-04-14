@@ -10,6 +10,8 @@
 import {onRequest} from "firebase-functions/v2/https";
 import * as admin from "firebase-admin";
 import * as logger from "firebase-functions/logger";
+import {initializeApp} from "firebase/app";
+import {getVertexAI, getImagenModel} from "firebase/vertexai";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
@@ -24,6 +26,11 @@ const db = admin.firestore();
 
 export const startGeneration = onRequest(async (req: any, res: any) => {
   try {
+    const vertexAI = getVertexAI(initializeApp());
+    const imagenModel = getImagenModel(vertexAI, {
+      model: "imagen-3.0-fast-generate-001",
+    });
+
     logger.info("startGeneration request body:", req.body);
 
     const {jobId} = req.body;
@@ -35,23 +42,60 @@ export const startGeneration = onRequest(async (req: any, res: any) => {
       return res.status(404).json({error: "Job not found"});
     }
 
-    const delayInSeconds = Math.floor(Math.random() * 31) + 30;
+    const response = await imagenModel.generateImages(
+      jobDoc.data()?.prompt +
+        "." +
+        jobDoc.data()?.style +
+        ", " +
+        jobDoc.data()?.style_description
+    );
 
+    if (response.filteredReason) {
+      console.log(response.filteredReason);
+    }
+
+    if (response.images.length == 0) {
+      throw new Error("No images in the response.");
+    }
     await jobDoc.ref.update({
       status: "processing",
       updated_at: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    setTimeout(async () => {
-      await jobDoc.ref.update({
-        status: "done",
-        result_url: "https://placehold.co/800.png",
-        updated_at: admin.firestore.FieldValue.serverTimestamp(),
-      });
-    }, delayInSeconds * 1000);
+    const image = response.images[0];
+    const bucket = admin.storage().bucket();
+    const fileName = `${jobId}.png`;
+    const file = bucket.file(fileName);
+    const buffer = Buffer.from(image.bytesBase64Encoded, "base64");
 
-    res.status(200).json({jobId: jobDoc.id, status: "processing"});
+    await file.save(buffer, {
+      metadata: {
+        contentType: "image/png",
+      },
+      public: true,
+      validation: "md5",
+    });
+
+    const url = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+
+    await jobDoc.ref.update({
+      status: "done",
+      result_url: url,
+      updated_at: admin.firestore.FieldValue.serverTimestamp(),
+    });
   } catch (error) {
+    const {jobId} = req.body;
+
+    if (jobId) {
+      const jobDoc = await db.collection("jobs").doc(jobId).get();
+      if (jobDoc.exists) {
+        await jobDoc.ref.update({
+          status: "error",
+          updated_at: admin.firestore.FieldValue.serverTimestamp(),
+        });
+      }
+    }
+    logger.error("Error processing job:", error);
     console.error("startGeneration error:", error);
     res.status(500).json({error: "Internal Server Error"});
   }
