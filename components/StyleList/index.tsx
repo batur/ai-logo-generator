@@ -8,9 +8,10 @@ import Seperator from "./Seperator";
 
 const List = () => {
   return (
-    <View className="flex flex-col gap-3 ml-6">
+    <View className="flex flex-col gap-3">
       <Header />
       <FlashList
+        className="px-6"
         estimatedItemSize={98}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
