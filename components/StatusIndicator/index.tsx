@@ -1,10 +1,13 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Alert } from "../Icons";
+import { Alert, Loop } from "../Icons";
 import { useJobIdStore } from "@/stores";
 import { router } from "expo-router";
 import { Image } from "expo-image";
 import utils from "@/utils";
+import { MotiView } from "moti";
+import { Easing } from "react-native-reanimated";
+import constants from "@/constants";
 
 type StatusIndicatorProps = {
   status?: "processing" | "done" | "error";
@@ -12,7 +15,7 @@ type StatusIndicatorProps = {
 };
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({
-  status,
+  status = "processing",
   imageURL,
 }) => {
   const { setJobId, jobId } = useJobIdStore();
@@ -29,8 +32,28 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
   if (status === "processing") {
     return (
       <View className="mx-6 flex flex-row">
-        <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4 bg-zinc-900 rounded-tl-2xl rounded-bl-2xl">
-          <View className="w-6 h-6 rounded-full bg-neutral-50" />
+        <View className="w-[70px] flex flex-row items-center justify-center p-4 bg-zinc-900 rounded-tl-2xl rounded-bl-2xl">
+          <MotiView
+            from={{ rotate: "0deg" }}
+            animate={{ rotate: "360deg" }}
+            transition={{
+              type: "timing",
+              duration: 2000,
+              delay: 0,
+              repeatReverse: false,
+              loop: true,
+              easing: Easing.linear,
+            }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 32,
+              height: 32,
+            }}
+          >
+            <Loop width={28} height={28} color={constants.NEUTRAL_WHITE} />
+          </MotiView>
         </View>
         <View className="flex flex-grow overflow-hidden rounded-tr-2xl rounded-br-2xl">
           <LinearGradient
