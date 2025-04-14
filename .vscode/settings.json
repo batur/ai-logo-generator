@@ -1,6 +1,12 @@
 {
   "files.exclude": {
     ".husky": true,
-    ".gitignore": true
+    ".gitignore": true,
+    "google-services.json": true,
+    "GoogleService-Info.plist": true,
+    "ios": true,
+    "android": true,
+    ".expo": true,
+    "node_modules": true
   }
 }
