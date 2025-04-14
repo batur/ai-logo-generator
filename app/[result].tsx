@@ -3,7 +3,6 @@ import {
   ScrollView,
   StatusBar,
   Text,
-  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,24 +13,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import constants from "@/constants";
 import { useGetSingleJob } from "@/hooks";
 import { useLocalSearchParams } from "expo-router";
-import { useCallback } from "react";
-import { getStorage, ref } from "@react-native-firebase/storage";
-
-const storage = getStorage();
+import utils from "@/utils";
 
 export default function Index() {
   const { result } = useLocalSearchParams<{ result: string }>();
   const { data } = useGetSingleJob({
     jobId: result,
   });
-
-  const imageURL = useCallback((rawURL: string | undefined) => {
-    if (!rawURL) {
-      return "";
-    }
-    const httpReference = ref(storage, rawURL);
-    return httpReference.fullPath;
-  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -45,7 +33,7 @@ export default function Index() {
           <Header variant="secondary" />
           <View className=" aspect-square mx-6 rounded-2xl overflow-hidden">
             <Image
-              source={imageURL(data?.result_url)}
+              source={utils.generateURL(data?.result_url)}
               style={{
                 width: "100%",
                 height: "100%",
