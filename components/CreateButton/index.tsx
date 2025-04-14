@@ -20,14 +20,13 @@ const CreateButton = () => {
       return;
     }
 
-    const styleDescription =
-      styles.find((style) => style.id === selectedStyleId)?.description || "";
+    const style = styles.find((style) => style.id === selectedStyleId);
 
     try {
       await mutateAsync({
         prompt: prompt,
-        style: selectedStyleId,
-        style_description: styleDescription,
+        style_name: style?.name || "",
+        style_description: style?.description || "",
       });
     } catch (error) {
       console.error("Error creating job:", error);

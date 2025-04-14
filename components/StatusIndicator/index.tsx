@@ -1,23 +1,25 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Alert } from "../Icons";
 import { useJobIdStore } from "@/stores";
 import { useEffect } from "react";
+import { router } from "expo-router";
 
 type StatusIndicatorProps = {
   status?: "processing" | "done" | "error";
 };
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
-  const { setJobId } = useJobIdStore();
+  const { setJobId, jobId } = useJobIdStore();
 
-  useEffect(() => {
-    if (status === "done") {
-      setTimeout(() => {
-        setJobId("");
-      }, 7500);
+  const handleChipPress = () => {
+    if (status === "error") {
+      return setJobId("");
     }
-  }, [status]);
+
+    setJobId("");
+    return router.navigate(`/${jobId}`);
+  };
 
   if (status === "processing") {
     return (
@@ -52,7 +54,10 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
 
   if (status === "error") {
     return (
-      <View className="mx-6 flex flex-row bg-white rounded-2xl">
+      <TouchableOpacity
+        className="mx-6 flex flex-row bg-white rounded-2xl"
+        onPress={handleChipPress}
+      >
         <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4  bg-red-500/70 rounded-tl-2xl rounded-bl-2xl">
           <Alert color={"#FAFAFA"} />
         </View>
@@ -64,13 +69,16 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
             Click to try again.
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 
   if (status === "done") {
     return (
-      <View className="mx-6 flex flex-row">
+      <TouchableOpacity
+        className="mx-6 flex flex-row"
+        onPress={handleChipPress}
+      >
         <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4 bg-white rounded-tl-2xl rounded-bl-2xl"></View>
         <View className="flex flex-grow overflow-hidden rounded-tr-2xl rounded-br-2xl">
           <LinearGradient
@@ -90,7 +98,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
             </View>
           </LinearGradient>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 };

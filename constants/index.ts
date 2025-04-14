@@ -19,5 +19,12 @@ const NO_STYLE_ITEM = {
 
 const BG_COLOR = "#09090B";
 const NEUTRAL_WHITE = "#FAFAFA";
+const ZINC_400 = "#A1A1AA";
 
-export default { SUPRISE_ME_PROMPTS, NO_STYLE_ITEM, BG_COLOR, NEUTRAL_WHITE };
+export default {
+  SUPRISE_ME_PROMPTS,
+  NO_STYLE_ITEM,
+  BG_COLOR,
+  NEUTRAL_WHITE,
+  ZINC_400,
+};

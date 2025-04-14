@@ -3,8 +3,8 @@ import { Timestamp } from "@react-native-firebase/firestore";
 export interface Job {
   id: string;
   prompt: string;
-  style: string;
   style_description: string;
+  style_name: string;
   status: "processing" | "done" | "error";
   result_url: string;
   updated_at: Timestamp;

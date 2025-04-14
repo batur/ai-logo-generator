@@ -51,7 +51,7 @@ export const usePostJobs = () => {
 
   return useMutation({
     mutationFn: async (
-      jobData: Pick<Job, "prompt" | "style" | "style_description">
+      jobData: Pick<Job, "prompt" | "style_name" | "style_description">
     ) => {
       const newJob = {
         ...jobData,
