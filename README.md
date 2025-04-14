@@ -1,50 +1,138 @@
-# Welcome to your Expo app 👋
+# AI Logo Generator
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+|                                                        |                                                         |                                                        |                                                         |
+| ------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| <img alt="AI Logo Generator" src="./docs/first.png" /> | <img alt="AI Logo Generator" src="./docs/second.png" /> | <img alt="AI Logo Generator" src="./docs/third.png" /> | <img alt="AI Logo Generator" src="./docs/fourth.png" /> |
 
-## Get started
+## Features
 
-1. Install dependencies
+1. AI-Powered Logo Creation: Generate professional logos using Google Vertex AI's Imagen model
+2. Multiple Design Styles: Choose from various logo styles including Monogram, Abstract, and more
+3. Text Prompt Interface: Describe your logo idea or use "Surprise Me" for random suggestions
+4. Real-time Status Updates: Track the progress of your logo generation
+5. Copy & Share: Copy prompts and share your generated logos
 
-   ```bash
-   npm install
-   ```
+## Technology Stack
 
-2. Start the app
+- Frontend: React Native, Expo
+- Styling: NativeWind (Tailwind CSS for React Native)
+- State Management: Zustand
+- Storage: Firebase Storage
+- Database: Firestore
+- AI Integration: Google Vertex AI (Imagen 3.0)
+- API: Firebase Cloud Functions
 
-   ```bash
-    npx expo start
-   ```
+## Prerequisites
 
-In the output, you'll find options to open the app in a
+Before you begin, ensure you have the following installed:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js (v16 or higher)
+- npm or yarn (I recommend using yarn)
+- Expo CLI & EAS
+- Firebase project with Firestore, Storage, and Authentication enabled
+- Google Cloud project with Vertex AI API enabled
+- Installation
+- Clone the repository
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Steps:
 
-## Get a fresh project
-
-When you're ready, run:
+1. Create a Firebase project
+2. Add iOS and Android apps to your Firebase project
+3. Download the configuration files:
+   - GoogleService-Info.plist for iOS
+   - google-services.json for Android
+4. Place these files in the project root directory and EAS environment variables
+5. Start the development server
+   - The project cannot be run using Expo Go, so you need to build the app using EAS or development build('Cuz of native Firebase integration for analytics and crashlytics)
 
 ```bash
-npm run reset-project
+yarn
+yarn expo run:ios # or
+yarn expo run:android
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+After the build is complete, you can run the app on your device or emulator no need additional setup for iOS and Android, just run the command below:
 
-## Learn more
+```bash
+yarn start
+#press 'i' to run on iOS simulator
+#press 'a' to run on Android emulator
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## How It Works
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. Create a Prompt: Enter a description for your desired logo
+2. Select a Style: Choose from available logo styles (or no style)
+3. Generate: The app sends your request to Firebase Cloud Functions
+4. AI Processing: The function uses Google Vertex AI to generate a logo based on your prompt and selected style
+5. Receive Result: The generated logo is stored in Firebase Storage and displayed in the app
 
-## Join the community
+## Project Structure
 
-Join our community of developers creating universal apps.
+- **/app**: Main application screens using file-based routing
+- **/components**: Reusable UI components
+- **/functions**: Firebase Cloud Functions for handling API requests
+- **/hooks**: Custom React hooks for API calls
+- **/stores**: Zustand stores for global state management
+- **/constants**: Application constants and configuration
+- **/utils**: Utility functions some generic functions for the app
+- **/assets**: Images and icons used in the app
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Using the Firebase Functions
+
+The project uses Firebase Cloud Functions to interface with Google Vertex AI:
+
+- Navigate to the functions directory
+
+```bash
+cd functions
+```
+
+- Install dependencies
+
+```bash
+yarn install
+```
+
+- Set up Firebase CLI
+
+```bash
+npm install -g firebase-tools
+firebase login
+firebase init functions
+```
+
+- Deploy the functions to Firebase
+
+```bash
+firebase deploy --only functions:startGeneration
+```
+
+## Troubleshooting
+
+- Common Issues
+  Firebase Connection Issues: Ensure your Firebase configuration files are correctly placed in the project root.
+- Image Generation Failures: Check that your Google Cloud project has the Vertex AI API enabled and proper billing set up.
+- Build Errors: Make sure all dependencies are installed and compatible versions are used.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+- Fork the repository
+- Create your feature branch (git checkout -b feature/amazing-feature)
+- Commit your changes (git commit -m 'Add some amazing feature')
+- Push to the branch (git push origin feature/amazing-feature)
+- Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+Google Vertex AI for the image generation capabilities
+
+Expo team for the excellent React Native development platform
+
+Firebase for backend services
