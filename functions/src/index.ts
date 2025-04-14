@@ -45,7 +45,7 @@ export const startGeneration = onRequest(async (req: any, res: any) => {
     setTimeout(async () => {
       await jobDoc.ref.update({
         status: "done",
-        result_url: "https://via.placeholder.com/512x512.png?text=Mock+Image",
+        result_url: "https://placehold.co/800.png",
         updated_at: admin.firestore.FieldValue.serverTimestamp(),
       });
     }, delayInSeconds * 1000);
