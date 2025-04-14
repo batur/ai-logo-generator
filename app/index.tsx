@@ -39,7 +39,10 @@ export default function Index() {
           className="relative"
         >
           <View className="flex flex-col gap-6">
-            <StatusIndicator status={singleJobData?.status} />
+            <StatusIndicator
+              status={singleJobData?.status}
+              imageURL={singleJobData?.result_url}
+            />
             <PromptBox />
             <StyleList />
           </View>

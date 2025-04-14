@@ -2,14 +2,19 @@ import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Alert } from "../Icons";
 import { useJobIdStore } from "@/stores";
-import { useEffect } from "react";
 import { router } from "expo-router";
+import { Image } from "expo-image";
+import utils from "@/utils";
 
 type StatusIndicatorProps = {
   status?: "processing" | "done" | "error";
+  imageURL?: string;
 };
 
-const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
+const StatusIndicator: React.FC<StatusIndicatorProps> = ({
+  status,
+  imageURL,
+}) => {
   const { setJobId, jobId } = useJobIdStore();
 
   const handleChipPress = () => {
@@ -79,7 +84,9 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
         className="mx-6 flex flex-row"
         onPress={handleChipPress}
       >
-        <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4 bg-white rounded-tl-2xl rounded-bl-2xl"></View>
+        <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4  rounded-tl-2xl rounded-bl-2xl">
+          <Image source={utils.generateURL(imageURL)} />
+        </View>
         <View className="flex flex-grow overflow-hidden rounded-tr-2xl rounded-br-2xl">
           <LinearGradient
             colors={["#943DFF", "#2938DC"]}
