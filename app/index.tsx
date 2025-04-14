@@ -8,12 +8,26 @@ import {
   StatusIndicator,
   StyleList,
 } from "@/components";
-import { useGetJobs } from "@/hooks";
+import { useGetJobs, useGetSingleJob, useGetStyles } from "@/hooks";
+import { useEffect, useState } from "react";
+import { useJobIdStore, useStylesStore } from "@/stores";
 
 export default function Index() {
-  const { data } = useGetJobs();
+  const { data: stylesData } = useGetStyles();
+  const { data: jobData } = useGetJobs();
+  const { jobId } = useJobIdStore();
+  const { data: singleJobData } = useGetSingleJob({
+    jobId: jobId,
+  });
 
-  console.log("Jobs data:", data?.map((job) => JSON.stringify(job)).join(", "));
+  const { setStyles } = useStylesStore();
+
+  useEffect(() => {
+    if (stylesData) {
+      setStyles(stylesData);
+    }
+  }, [stylesData, setStyles]);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar showHideTransition="fade" barStyle="light-content" />
@@ -25,7 +39,7 @@ export default function Index() {
           className="relative"
         >
           <View className="flex flex-col gap-6">
-            <StatusIndicator />
+            <StatusIndicator status={singleJobData?.status} />
             <PromptBox />
             <StyleList />
           </View>

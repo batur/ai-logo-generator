@@ -1,12 +1,24 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text } from "react-native";
 import { Alert } from "../Icons";
+import { useJobIdStore } from "@/stores";
+import { useEffect } from "react";
 
 type StatusIndicatorProps = {
   status?: "processing" | "done" | "error";
 };
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status }) => {
+  const { setJobId } = useJobIdStore();
+
+  useEffect(() => {
+    if (status === "done") {
+      setTimeout(() => {
+        setJobId("");
+      }, 5000);
+    }
+  }, [status]);
+
   if (status === "processing") {
     return (
       <View className="mx-6 flex flex-row">

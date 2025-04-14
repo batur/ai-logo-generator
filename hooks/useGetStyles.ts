@@ -1,3 +1,4 @@
+import { Style } from "@/types";
 import {
   collection,
   getDocs,
@@ -8,18 +9,18 @@ import { useQuery } from "@tanstack/react-query";
 
 const db = getFirestore();
 const fetchStyles = async () => {
-  const q = query(collection(db, "jobs"));
+  const q = query(collection(db, "styles"));
   const querySnapshot = await getDocs(q);
 
-  const jobs: any[] = [];
+  const styles: Style[] = [];
   querySnapshot.forEach((doc) => {
-    jobs.push({
+    styles.push({
       id: doc.id,
-      ...doc.data(),
+      ...(doc.data() as Omit<Style, "id">),
     });
   });
 
-  return jobs;
+  return styles;
 };
 
 const useGetJobs = () =>

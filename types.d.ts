@@ -4,6 +4,7 @@ export interface Job {
   id: string;
   prompt: string;
   style: string;
+  style_description: string;
   status: "processing" | "done" | "error";
   result_url: string;
   updated_at: Timestamp;
@@ -13,6 +14,6 @@ export interface Job {
 export interface Style {
   id: string;
   name: string;
-  image: string | null;
-  description: string | null;
+  image_url: string;
+  description: string;
 }
