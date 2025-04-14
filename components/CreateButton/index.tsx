@@ -5,6 +5,7 @@ import { TouchableOpacity, Dimensions, View, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import constants from "@/constants";
 import { usePostJobs } from "@/hooks";
+import * as Haptics from "expo-haptics";
 
 const CreateButton = () => {
   const insets = useSafeAreaInsets();
@@ -21,7 +22,7 @@ const CreateButton = () => {
     }
 
     const style = styles.find((style) => style.id === selectedStyleId);
-
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     try {
       await mutateAsync({
         prompt: prompt,
@@ -29,6 +30,7 @@ const CreateButton = () => {
         style_description: style?.description || "",
       });
     } catch (error) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       console.error("Error creating job:", error);
     }
 

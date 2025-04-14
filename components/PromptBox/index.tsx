@@ -4,6 +4,7 @@ import { Cancel } from "../Icons";
 import { memo, useCallback, useRef } from "react";
 import { usePromptStore } from "@/stores";
 import constants from "@/constants";
+import * as Haptics from "expo-haptics";
 
 const MAX_LENGTH = 500;
 
@@ -27,14 +28,13 @@ const PromptBox = () => {
     animatingRef.current = true;
     shakeAnimation.transitionTo("from");
 
-    // Set the prompt
     setPrompt(
       constants.SUPRISE_ME_PROMPTS[
         Math.floor(Math.random() * constants.SUPRISE_ME_PROMPTS.length)
       ]
     );
 
-    // Reset animation state after it completes
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     setTimeout(() => {
       shakeAnimation.transitionTo("from");
       animatingRef.current = false;

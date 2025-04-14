@@ -8,6 +8,7 @@ import { Image } from "expo-image";
 import { useStylesStore } from "@/stores";
 import { memo, useCallback } from "react";
 import utils from "@/utils";
+import * as Haptics from "expo-haptics";
 
 type Props = {
   item: Style;
@@ -18,7 +19,8 @@ const Item: React.FC<Props> = ({ item }) => {
   const isNoStyle = item.id === "0" || item.name === "No Style";
 
   const onItemPress = useCallback((id: string) => {
-    setSelectedStyle(id);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    return setSelectedStyle(id);
   }, []);
 
   return (

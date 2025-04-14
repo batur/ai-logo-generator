@@ -8,6 +8,8 @@ import utils from "@/utils";
 import { MotiView } from "moti";
 import { Easing } from "react-native-reanimated";
 import constants from "@/constants";
+import * as Haptics from "expo-haptics";
+import { useEffect } from "react";
 
 type StatusIndicatorProps = {
   status?: "processing" | "done" | "error";
@@ -28,6 +30,18 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
     setJobId("");
     return router.navigate(`/${jobId}`);
   };
+
+  useEffect(() => {
+    if (status === "done") {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    }
+    if (status === "error") {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    }
+    if (status === "processing") {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
+  }, [status]);
 
   if (status === "processing") {
     return (

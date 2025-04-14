@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Cancel } from "../Icons";
 import constants from "@/constants";
 import { router } from "expo-router";
+import * as Haptics from "expo-haptics";
 
 type HeaderProps = {
   variant?: "default" | "secondary";
@@ -9,6 +10,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ variant = "default" }) => {
   const handleCancelPress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     return router.canGoBack() ? router.back() : router.push("/");
   };
 
