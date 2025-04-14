@@ -41,7 +41,7 @@ The project is designed to be deployed using EAS (Expo Application Services) for
 Also latest build of the app building in EAS right now, you can check the latest builds:
 
 - [iOS Build](https://expo.dev/accounts/paxtartarica/projects/ai-logo-generator/builds/94487601-7f37-4a78-b769-b62167cecd46)
-- [Android Build](https://expo.dev/accounts/paxtartarica/projects/ai-logo-generator/builds/47ae0498-6837-4d58-806d-9d8b5ecfd34d)
+- [Android Build](https://expo.dev/artifacts/eas/9RnR9ExCoyxumSiXRjwbjz.aab)
 
 _Side note: The links above are for the latest builds, but you can check the latest build in the EAS dashboard. The links can be updated when a new build is created._
 
