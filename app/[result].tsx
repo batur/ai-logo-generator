@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 
+import * as Clipboard from "expo-clipboard";
 import { BackgroundGradient, Header, Icons } from "@/components";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
@@ -20,6 +21,12 @@ export default function Index() {
   const { data } = useGetSingleJob({
     jobId: result,
   });
+
+  const copyToClipboard = async (prompt?: string) => {
+    if (!prompt) return;
+
+    await Clipboard.setStringAsync(prompt);
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -56,7 +63,10 @@ export default function Index() {
                 <Text className="text-neutral-50 text-[15px] font-bold leading-5 font-serif">
                   Prompt
                 </Text>
-                <TouchableOpacity className="flex flex-row items-center justify-center gap-[6px]">
+                <TouchableOpacity
+                  className="flex flex-row items-center justify-center gap-[6px]"
+                  onPress={() => copyToClipboard(data?.prompt)}
+                >
                   <Icons.Copy
                     width={16}
                     height={16}
@@ -70,11 +80,13 @@ export default function Index() {
               <Text className="text-neutral-50 text-base font-medium py-3 font-serif">
                 {data?.prompt}
               </Text>
-              <View className="p-2 bg-zinc-800/0 rounded-full max-w-20">
-                <Text className="text-neutral-50 text-xs font-normal font-serif">
-                  {data?.style_name}
-                </Text>
-              </View>
+              {data?.style_name && (
+                <View className="p-2 bg-zinc-800/0 rounded-full max-w-20">
+                  <Text className="text-neutral-50 text-xs font-normal font-serif">
+                    {data?.style_name}
+                  </Text>
+                </View>
+              )}
             </LinearGradient>
           </View>
         </ScrollView>

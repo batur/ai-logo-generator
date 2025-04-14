@@ -9,7 +9,7 @@ import {
   StyleList,
 } from "@/components";
 import { useGetJobs, useGetSingleJob, useGetStyles } from "@/hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useJobIdStore, useStylesStore } from "@/stores";
 
 export default function Index() {
