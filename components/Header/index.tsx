@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import { Icons } from "..";
+import { Cancel } from "../Icons";
 import constants from "@/constants";
 import { router } from "expo-router";
 
@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ variant = "default" }) => {
         activeOpacity={0.7}
         onPress={handleCancelPress}
       >
-        <Icons.Cancel color={constants.NEUTRAL_WHITE} width={20} height={20} />
+        <Cancel color={constants.NEUTRAL_WHITE} width={20} height={20} />
       </TouchableOpacity>
     </View>
   );
