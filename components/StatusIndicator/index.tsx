@@ -84,8 +84,17 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
         className="mx-6 flex flex-row"
         onPress={handleChipPress}
       >
-        <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4  rounded-tl-2xl rounded-bl-2xl">
-          <Image source={utils.generateURL(imageURL)} />
+        <View className="h-[70px] w-[70px] flex flex-row items-center justify-center p-4 rounded-tl-2xl rounded-bl-2xl overflow-hidden">
+          <Image
+            source={utils.generateURL(imageURL)}
+            style={{
+              width: 70,
+              height: 70,
+              aspectRatio: 1,
+              borderTopLeftRadius: 16,
+              borderBottomLeftRadius: 16,
+            }}
+          />
         </View>
         <View className="flex flex-grow overflow-hidden rounded-tr-2xl rounded-br-2xl">
           <LinearGradient
